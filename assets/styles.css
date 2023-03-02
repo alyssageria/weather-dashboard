@@ -1,0 +1,106 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0;
+}
+
+:root {
+    --dark-blue: darkblue;
+}
+
+/* main styles */
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+/* header styles */
+.nav-header {
+    background-color: var(--dark-blue);
+    color: white;
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+}
+
+/* search for city styles */
+.search {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 5%;
+}
+
+.search-h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.search-btn {
+    margin: .5rem;
+    border-radius: .5rem;
+    background-color: lightblue;
+}
+
+.search-btn:hover {
+    background-color: var(--dark-blue);
+    color: white;
+}
+
+.history-btn {
+    margin: .5rem;
+    border-radius: .5rem;
+}
+
+.history-btn:hover {
+    background-color: var(--dark-blue);
+    color: white;
+}
+
+/* forecast and selected city styles */
+.current-city {
+    border: 1px solid black;
+    height: 30vh;
+    padding: 2rem;
+}
+
+.forecast {
+    display: flex;
+    height: 40vh;
+}
+
+.forecast-h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.box {
+    background-color: var(--dark-blue);
+    color: white;
+    display: flex;
+    height: 175px;
+    width: 150px;
+    margin: .5rem;
+}
+
+.forecast-city {
+    align-content: space-around;
+    height: 60vh;
+    padding-top: 3.2rem;
+}
+
+.selected-city {
+    font-weight: bold;
+}
+
+.title-div {
+    display: flex;
+    padding-top: 1rem;
+}
+
+.card-div {
+    display: flex;
+    align-items: center;
+}
