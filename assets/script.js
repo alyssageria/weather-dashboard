@@ -1,36 +1,42 @@
 //variables
 var searchButton = $('.search-btn');
+var forecastDiv = $('.forecast-city');
+var cityInput = $('.city-input');
+var currentDay = dayjs().format('M/D/YYYY');
 
 //fetch the API for the city
-async function getApi() {
-    var openWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=Anaheim&APPID=f4cf2123039124c240525b2f1d0e4cb3`;
-    var fiveDayForecast = `https://api.openweathermap.org/data/2.5/forecast?q=Anaheim&appid=f4cf2123039124c240525b2f1d0e4cb3`
-    var response = await fetch(openWeatherUrl);
-    var data = await response.json();
-    var res = await fetch(fiveDayForecast);
-    var dat = await res.json();
+function getApi(city) {
+    var openWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=f4cf2123039124c240525b2f1d0e4cb3`;
+    var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&=imperial&appid=f4cf2123039124c240525b2f1d0e4cb3`;
+    fetch(openWeatherUrl).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        displayWeather(data);
+    })
+    console.log(openWeatherUrl);
+
+}
+
+function displayWeather(data) {
+    console.log(data);
+    var cardDiv = $("<div>").addClass("card");
+    var cardTitle = $("<h3>").addClass("card-title").text(data.name);
+    var ulEl = $("<ul>").addClass("current-weather");
+    var liEl = $("<li>").addClass("list-item");
+    var icon = $("<img>").attr("src", `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
     var temp = data.main.temp;
-    var farenheit = convert(temp);
-    var humidity = data.main.humidity;
     var wind = data.wind.speed;
-    var fiveDay = [];
-    console.log(dat);
-    console.log(wind);
-    // console.log(data);
-    for (i = 0; i < 5; i++) {
-        var con = convert(dat.list[i].main.temp);
-        var humid = dat.list[i].main.humidity;
-        var windSpeed = dat.list[i].wind.speed;
-    }
+    var humidity = data.main.humidity;
+    console.log(humidity);
+    $(".current-city").append(cardDiv.append(cardTitle.append(icon)));
+    $(".current-city").append(cardDiv.append("Temp: " + Math.round(temp) + "°F"));
+    $(".current-city").append(cardDiv.append("Wind: " + (wind) + " MPH"));
+    $(".current-city").append(cardDiv.append("Humidity: " + Math.round(humidity) + "%"));
 }
 
-function convert(kelvin) {
-    let convertedTemp = ((kelvin - 273.15) * 9) / 5 + 32;
-    convertedTemp = Math.round(convertedTemp);
-    return convertedTemp;
-}
+$('#search').click(function () {
+    var city = $(".city-input").val().trim();
+    getApi(city);
+})
 
-getApi();
-//event listener for search button when searching a city
-//make the divs on the right hidden and visible when search but is clicked
 

@@ -16,11 +16,37 @@
             <h2 class="nav-header">Weather Dashboard</h2>
         </navbar>
     </header>
-    <section class="main container col">
-        <div class="search m-5">
+    <section class="main row" style="border: 1px solid black">
+        <div class="col-3" style="border: 1px solid black">
             <h3 class="search-h3">Search For a City:</h3>
-            <input type="text">
-            <button class="search-btn">Search</button>
+            <input type="text" class="city-input">
+            <button id="search" class="search-btn">Search</button>
+            <hr>
+            <div class="d-flex flex-column">
+                <button class="history-btn invisible">Atlanta</button>
+                <button class="history-btn invisible">Denver</button>
+                <button class="history-btn invisible">Seattle</button>
+                <button class="history-btn invisible">San Francisco</button>
+                <button class="history-btn invisible">Orlando</button>
+                <button class="history-btn invisible">New York</button>
+                <button class="history-btn invisible">Chicago</button>
+                <button class="history-btn invisible">Austin</button>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="row current-city">
+                <!-- <ul class="current-weather">
+
+                </ul> -->
+            </div>
+            <div class="row forecast">
+
+            </div>
+        </div>
+        <!-- <div class="search m-5">
+            <h3 class="search-h3">Search For a City:</h3>
+            <input type="text" class="city-input">
+            <button id="search" class="search-btn">Search</button>
             <hr>
             <button class="history-btn">Atlanta</button>
             <button class="history-btn">Denver</button>
@@ -32,26 +58,25 @@
             <button class="history-btn">Austin</button>
         </div>
         <div class="forecast-city row">
-            <div class="current-city">
+            <div class="current-city card hide">
                 <h3 class="selected-city">Atlanta (9/13/2022)</h3>
                 <p id="temp">Temp: 76.62°F</p>
                 <p id="wind">Wind: 8.42 MPH</p>
                 <p id="humidity">Humidity: 44%</p>
             </div>
-            <!-- <div class="forecast"> -->
-            <div class="title-div">
-                <h2 class="forecast-h2">5-Day Forecast:</h2>
+            <div class="forecast">
+                <div class="title-div">
+                    <h2 class="forecast-h2">5-Day Forecast:</h2>
+                </div>
+                <div class="card-div">
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                </div>
             </div>
-            <div class="card-div">
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-            </div>
-            <!-- </div> -->
-
-        </div>
+        </div> -->
     </section>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

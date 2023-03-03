@@ -59,12 +59,16 @@
     color: white;
 }
 
+.invisible {
+    display: none;
+}
+
 /* forecast and selected city styles */
-.current-city {
+/* .current-city {
     border: 1px solid black;
     height: 30vh;
     padding: 2rem;
-}
+} */
 
 .forecast {
     display: flex;
@@ -103,4 +107,8 @@
 .card-div {
     display: flex;
     align-items: center;
+}
+
+.hide {
+    display: none;
 }
