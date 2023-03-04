@@ -64,11 +64,6 @@
 }
 
 /* forecast and selected city styles */
-/* .current-city {
-    border: 1px solid black;
-    height: 30vh;
-    padding: 2rem;
-} */
 
 .forecast {
     /* display: flex; */
@@ -114,15 +109,3 @@
 .new-div {
     display: flex;
 }
-
-/* .hide {
-    display: none;
-} */
-
-/* .div2 {
-    display: flex;
-} */
-
-/* .visibility {
-    display: none;
-} */
