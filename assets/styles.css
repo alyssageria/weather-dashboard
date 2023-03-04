@@ -71,7 +71,7 @@
 } */
 
 .forecast {
-    display: flex;
+    /* display: flex; */
     height: 40vh;
 }
 
@@ -82,8 +82,10 @@
 
 .box {
     background-color: var(--dark-blue);
+    border: 2px solid black;
     color: white;
     display: flex;
+    flex-direction: row;
     height: 175px;
     width: 150px;
     margin: .5rem;
@@ -109,6 +111,14 @@
     align-items: center;
 }
 
-.hide {
+/* .hide {
     display: none;
-}
+} */
+
+/* .div2 {
+    display: flex;
+} */
+
+/* .visibility {
+    display: none;
+} */
