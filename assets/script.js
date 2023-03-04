@@ -5,7 +5,7 @@ var cityInput = $('.city-input');
 var currentDay = dayjs().format('M/D/YYYY');
 
 
-// $(".visibility").hide();
+$(".visibility").hide();
 //fetch the API for the city
 function getApi(city) {
     var openWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=f4cf2123039124c240525b2f1d0e4cb3`;
@@ -43,35 +43,44 @@ function displayWeather(data) {
 
 function displayWeather2(data2) {
     console.log(data2);
-    var boxDiv2 = $("<div>").addClass("div2");
+
+    //divs
+    var boxDiv2 = $("<div>").addClass("card-div");
     var cardTitle2 = $("<h3>").addClass("card-title");
     var titleDiv = $("<div>").addClass("title-div")
     var boxDiv = $("<div>").addClass("box-div");
+
+    //variables with box text
     var boxInfo1 = $("<p>").addClass("box-info");
     var boxInfo2 = $("<p>").addClass("box-info");
     var boxInfo3 = $("<p>").addClass("box-info");
     var boxInfo4 = $("<p>").addClass("box-info");
     var boxInfo5 = $("<p>").addClass("box-info");
+
+    //variables for the boxes
     var forecastBox1 = $("<div>").addClass("box");
     var forecastBox2 = $("<div>").addClass("box");
     var forecastBox3 = $("<div>").addClass("box");
     var forecastBox4 = $("<div>").addClass("box");
     var forecastBox5 = $("<div>").addClass("box");
+
+    //temp/wind/humidity
     var temp2 = Math.round(data2.list[1].main.temp);
     var wind2 = data2.list[1].wind.speed;
     var humidity2 = Math.round(data2.list[1].main.humidity);
 
-    // $(".visibility").show();
-    $(".forecast").append(titleDiv.append(cardTitle2.append("5 Day Forecast: ")));
-    $(".forecast").append(boxDiv2).append(forecastBox1.append(boxInfo1.append("test")));
-    $(".forecast").append(boxDiv2).append(forecastBox2.append(boxInfo2.append("test")));
-    $(".forecast").append(boxDiv2).append(forecastBox3.append(boxInfo3.append("test")));
-    $(".forecast").append(boxDiv2).append(forecastBox4.append(boxInfo4.append("test")));
-    $(".forecast").append(boxDiv2).append(forecastBox5.append(boxInfo5.append("test")));
+    $(".visibility").show();
+    $(".title-div").append(cardTitle2.append("5 Day Forecast: "));
+    $(".new-div").append(boxDiv2).append(forecastBox1.append(boxInfo1.append("test")));
+    $(".new-div").append(boxDiv2).append(forecastBox2.append(boxInfo2.append("test")));
+    $(".new-div").append(boxDiv2).append(forecastBox3.append(boxInfo3.append("test")));
+    $(".new-div").append(boxDiv2).append(forecastBox4.append(boxInfo4.append("test")));
+    $(".new-div").append(boxDiv2).append(forecastBox5.append(boxInfo5.append("test")));
+
 }
 
 $('#search').click(function () {
-    // $(".visibility").show();
+    $(".visibility").show();
     var city = $(".city-input").val().trim();
     getApi(city);
     setLocalStorage();

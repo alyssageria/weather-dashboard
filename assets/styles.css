@@ -29,7 +29,7 @@
 .search {
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding: 5%;
 }
 
@@ -109,6 +109,10 @@
 .card-div {
     display: flex;
     align-items: center;
+}
+
+.new-div {
+    display: flex;
 }
 
 /* .hide {
