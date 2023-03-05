@@ -7,7 +7,8 @@
 }
 
 :root {
-    --dark-blue: darkblue;
+    --dark-blue: #51588E;
+    --dark-purple: #3b0360;
 }
 
 /* main styles */
@@ -18,7 +19,8 @@
 
 /* header styles */
 .nav-header {
-    background-color: var(--dark-blue);
+    /* background-color: var(--dark-blue); */
+    background: linear-gradient(to left top, var(--dark-blue), var(--dark-purple));
     color: white;
     padding: 2%;
     display: flex;
@@ -41,11 +43,12 @@
 .search-btn {
     margin: .5rem;
     border-radius: .5rem;
-    background-color: lightblue;
+    background-color: var(--dark-blue);
+    color: white;
 }
 
 .search-btn:hover {
-    background-color: var(--dark-blue);
+    background-color: var(--dark-purple);
     color: white;
 }
 
@@ -59,9 +62,6 @@
     color: white;
 }
 
-.invisible {
-    display: none;
-}
 
 /* forecast and selected city styles */
 
@@ -108,4 +108,8 @@
 
 .new-div {
     display: flex;
+}
+
+.box-info {
+    padding: 5px;
 }

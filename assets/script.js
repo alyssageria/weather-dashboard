@@ -2,7 +2,7 @@
 var searchButton = $('.search-btn');
 var forecastDiv = $('.forecast-city');
 var cityInput = $('.city-input');
-
+var localStorageArray = loadLocalStorage();
 
 var currentDay = dayjs().format('M/D/YYYY');
 
@@ -35,6 +35,7 @@ function getApi(city) {
     })
 }
 
+//displays the current weather
 function displayWeather(data) {
     console.log(data);
     var cardDiv = $("<div>").addClass("card");
@@ -53,6 +54,7 @@ function displayWeather(data) {
     var cardTitle2 = $("<h3>").addClass("card-title").text(data)
 }
 
+//displays the following 5 days forecast
 function displayWeather2(data2) {
     console.log(data2);
 
@@ -128,22 +130,49 @@ function displayWeather2(data2) {
 }
 
 
+//event listener
 $('#search').click(function () {
     var city = $(".city-input").val().trim();
+    var words = city.split(" ");
+    var formattedCity = "";
 
-    console.log(city);
-    if (city === "") {
-        alert("Please Input a City");
-    } else {
-        getApi(city);
+    //capitalizes every first letter in each word
+    for (var i = 0; i < words.length; i++) {
+        var word = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+        formattedCity += word + " ";
     }
 
+    formattedCity = formattedCity.trim();
 
-
+    //if nothing is input, it will alert them to put in a city. else, it will run the functions to get the weather
+    if (formattedCity === "") {
+        alert("Please Input a City");
+    } else {
+        getApi(formattedCity);
+        localStorageArray.push(formattedCity);
+        savelocalStorage(localStorageArray);
+        buttonHistory();
+    }
 })
 
+//creating my array for local storage
+function loadLocalStorage() {
+    var localStorageArray = JSON.parse(localStorage.getItem('cities searched')) || [];
 
+    return localStorageArray;
+}
 
-// var searchHistory = $(".city-input").val();
-//     var chosenCity = $(".search").val();
-//     localStorage.setItem(chosenCity, searchHistory);
+//saves to local storage
+function savelocalStorage(array) {
+    localStorage.setItem('cities searched', JSON.stringify(array));
+}
+
+function buttonHistory() {
+    var historyButton = $("<button>").addClass("history-btn");
+
+    for (var i = 0; i < localStorageArray.length; i++) {
+        if (localStorageArray) {
+            $(".buttons").append(historyButton.append(localStorageArray[i]));
+        }
+    }
+}
