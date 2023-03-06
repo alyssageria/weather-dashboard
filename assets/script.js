@@ -2,7 +2,7 @@
 var searchButton = $('.search-btn');
 var forecastDiv = $('.forecast-city');
 var cityInput = $('.city-input');
-var localStorageArray = loadLocalStorage();
+var localStorageArray = JSON.parse(localStorage.getItem('cities searched')) || [];
 
 var currentDay = dayjs().format('M/D/YYYY');
 
@@ -132,6 +132,9 @@ function displayWeather2(data2) {
 
 //event listener
 $('#search').click(function () {
+    $(".title-div").empty();
+    $(".current-city").empty();
+    $(".new-div").empty();
     var city = $(".city-input").val().trim();
     var words = city.split(" ");
     var formattedCity = "";
@@ -149,30 +152,33 @@ $('#search').click(function () {
         alert("Please Input a City");
     } else {
         getApi(formattedCity);
-        localStorageArray.push(formattedCity);
-        savelocalStorage(localStorageArray);
+        // localStorageArray.push(formattedCity);
+        savelocalStorage(localStorageArray, formattedCity);
+        console.log(formattedCity);
         buttonHistory();
     }
 })
 
-//creating my array for local storage
-function loadLocalStorage() {
-    var localStorageArray = JSON.parse(localStorage.getItem('cities searched')) || [];
-
-    return localStorageArray;
-}
-
 //saves to local storage
-function savelocalStorage(array) {
+function savelocalStorage(array, formattedCity) {
+    if (!localStorageArray.includes(formattedCity)) {
+        localStorageArray.push(formattedCity);
+    }
+
     localStorage.setItem('cities searched', JSON.stringify(array));
 }
 
-function buttonHistory() {
-    var historyButton = $("<button>").addClass("history-btn");
-
+//create a button with city history
+function buttonHistory(formattedCity) {
     for (var i = 0; i < localStorageArray.length; i++) {
-        if (localStorageArray) {
-            $(".buttons").append(historyButton.append(localStorageArray[i]));
+        if ($(".buttons").find(".history-btn").filter(function () { return $(this).text() === localStorageArray[i]; }).length == 0) {
+            var historyButton = $("<button>").addClass("history-btn").text(localStorageArray[i]);
+            $(".buttons").append(historyButton);
         }
     }
+
+    $(".history-button").click(function () {
+
+    })
 }
+
