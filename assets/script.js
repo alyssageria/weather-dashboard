@@ -1,8 +1,11 @@
 //variables
 var searchButton = $('.search-btn');
-var forecastDiv = $('.forecast-city');
+var forecastDiv = $('.forecast');
+var currentDiv = $('.current-city');
+var buttonsDiv = $('.buttons');
 var cityInput = $('.city-input');
 var localStorageArray = JSON.parse(localStorage.getItem('cities searched')) || [];
+
 
 var currentDay = dayjs().format('M/D/YYYY');
 
@@ -13,19 +16,21 @@ var day4 = dayjs().add(4, 'day').format('M/D/YYYY');
 var day5 = dayjs().add(5, 'day').format('M/D/YYYY');
 
 
+//calls my button history function and makes sure that even when page is refreshed, history is displayed
+$(document).ready(function () {
+    buttonHistory();
+});
 
 //fetch the API for the city
 function getApi(city) {
-    if (!city) {
-        alert('Please enter a city name');
-        return;
-    }
+
     var openWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=f4cf2123039124c240525b2f1d0e4cb3`;
     var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=f4cf2123039124c240525b2f1d0e4cb3`;
     fetch(openWeatherUrl).then(function (response) {
         return response.json();
     }).then(function (data) {
         displayWeather(data);
+
     })
 
     fetch(forecastUrl).then(function (response) {
@@ -33,11 +38,11 @@ function getApi(city) {
     }).then(function (data2) {
         displayWeather2(data2);
     })
+
 }
 
 //displays the current weather
 function displayWeather(data) {
-    console.log(data);
     var cardDiv = $("<div>").addClass("card");
     var cardTitle = $("<h3>").addClass("card-title").text(data.name);
     var cardInfo = $("<h4>").addClass("card-info");
@@ -49,20 +54,13 @@ function displayWeather(data) {
     $(".current-city").append(cardDiv.append(cardInfo.append("Temp: " + Math.round(temp) + "°F" + "<br>")));
     $(".current-city").append(cardDiv.append(cardInfo.append("Wind: " + (wind) + " MPH" + "<br>")));
     $(".current-city").append(cardDiv.append(cardInfo.append("Humidity: " + Math.round(humidity) + "%" + "<br>")));
-
-    var cardDiv2 = $("<div>").addClass("card");
-    var cardTitle2 = $("<h3>").addClass("card-title").text(data)
 }
 
 //displays the following 5 days forecast
 function displayWeather2(data2) {
-    console.log(data2);
-
     //divs
     var boxDiv2 = $("<div>").addClass("card-div");
     var cardTitle2 = $("<h3>").addClass("card-title");
-    var titleDiv = $("<div>").addClass("title-div")
-    var boxDiv = $("<div>").addClass("box-div");
     //icons for each day
     var icon1 = $("<img>").attr("src", `http://openweathermap.org/img/wn/${data2.list[8].weather[0].icon}@2x.png`);
     var icon2 = $("<img>").attr("src", `http://openweathermap.org/img/wn/${data2.list[16].weather[0].icon}@2x.png`);
@@ -130,7 +128,7 @@ function displayWeather2(data2) {
 }
 
 
-//event listener
+//search button event listener
 $('#search').click(function () {
     $(".title-div").empty();
     $(".current-city").empty();
@@ -152,7 +150,6 @@ $('#search').click(function () {
         alert("Please Input a City");
     } else {
         getApi(formattedCity);
-        // localStorageArray.push(formattedCity);
         savelocalStorage(localStorageArray, formattedCity);
         console.log(formattedCity);
         buttonHistory();
@@ -169,16 +166,21 @@ function savelocalStorage(array, formattedCity) {
 }
 
 //create a button with city history
-function buttonHistory(formattedCity) {
+function buttonHistory() {
     for (var i = 0; i < localStorageArray.length; i++) {
         if ($(".buttons").find(".history-btn").filter(function () { return $(this).text() === localStorageArray[i]; }).length == 0) {
             var historyButton = $("<button>").addClass("history-btn").text(localStorageArray[i]);
             $(".buttons").append(historyButton);
         }
     }
-
-    $(".history-button").click(function () {
-
-    })
 }
+
+//history buttons event listener
+buttonsDiv.on('click', 'button', function () {
+    $(".title-div").empty();
+    $(".current-city").empty();
+    $(".new-div").empty();
+    var cityName = $(this).text();
+    getApi(cityName);
+})
 
