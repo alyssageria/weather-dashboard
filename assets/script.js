@@ -110,8 +110,6 @@ function displayWeather2(data2) {
     var wind5 = data2.list[39].wind.speed;
     var humidity5 = Math.round(data2.list[39].main.humidity);
 
-
-    $(".visibility").show();
     $(".title-div").append(cardTitle2.append("5 Day Forecast: "));
     $(".new-div").append(boxDiv2).append(forecastBox1.append(boxInfo1.append(day1).append(icon1)));
     $(".new-div").append(boxDiv2).append(forecastBox2.append(boxInfo2.append(day2).append(icon2)));

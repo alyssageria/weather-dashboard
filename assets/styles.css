@@ -19,7 +19,6 @@
 
 /* header styles */
 .nav-header {
-    /* background-color: var(--dark-blue); */
     background: linear-gradient(to left top, var(--dark-blue), var(--dark-purple));
     color: white;
     padding: 2%;
@@ -31,7 +30,6 @@
 .search {
     display: flex;
     flex-direction: column;
-    /* border: 1px solid black; */
     padding: 5%;
 }
 
@@ -64,15 +62,8 @@
 
 
 /* forecast and selected city styles */
-
 .forecast {
-    /* display: flex; */
     height: 40vh;
-}
-
-.forecast-h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
 }
 
 .box {
@@ -118,17 +109,10 @@
     .main {
         display: flex;
         flex-direction: column;
-        /* align-items: center; */
-        /* align-content: flex-end; */
         width: 100vw;
         margin: 0;
         padding: 0;
     }
-
-    /* .search {
-        width: 100vw;
-        height: 75vh;
-    } */
 
     .search-h3 {
         width: 15rem;
